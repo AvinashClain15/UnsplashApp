@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7E192082B60F98000A4F858 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E192072B60F98000A4F858 /* UnsplashAPI.swift */; };
+		B7E1920A2B60FCBE00A4F858 /* FeedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E192092B60FCBE00A4F858 /* FeedState.swift */; };
+		B7E1920C2B614CC200A4F858 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E1920B2B614CC200A4F858 /* TopicView.swift */; };
 		B7F4A8762B5FEDCB00C9A1BE /* UnsplashAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F4A8752B5FEDCB00C9A1BE /* UnsplashAppApp.swift */; };
 		B7F4A8782B5FEDCB00C9A1BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F4A8772B5FEDCB00C9A1BE /* ContentView.swift */; };
 		B7F4A87A2B5FEDCD00C9A1BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F4A8792B5FEDCD00C9A1BE /* Assets.xcassets */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7E192072B60F98000A4F858 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		B7E192092B60FCBE00A4F858 /* FeedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedState.swift; sourceTree = "<group>"; };
+		B7E1920B2B614CC200A4F858 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		B7F4A8722B5FEDCB00C9A1BE /* UnsplashApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F4A8752B5FEDCB00C9A1BE /* UnsplashAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAppApp.swift; sourceTree = "<group>"; };
 		B7F4A8772B5FEDCB00C9A1BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +65,9 @@
 				B7F4A8832B60113C00C9A1BE /* PListManager.swift */,
 				B7F4A8752B5FEDCB00C9A1BE /* UnsplashAppApp.swift */,
 				B7F4A8772B5FEDCB00C9A1BE /* ContentView.swift */,
+				B7E1920B2B614CC200A4F858 /* TopicView.swift */,
+				B7E192072B60F98000A4F858 /* UnsplashAPI.swift */,
+				B7E192092B60FCBE00A4F858 /* FeedState.swift */,
 				B7F4A8792B5FEDCD00C9A1BE /* Assets.xcassets */,
 				B7F4A87B2B5FEDCD00C9A1BE /* Preview Content */,
 			);
@@ -144,6 +153,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E1920A2B60FCBE00A4F858 /* FeedState.swift in Sources */,
+				B7E192082B60F98000A4F858 /* UnsplashAPI.swift in Sources */,
+				B7E1920C2B614CC200A4F858 /* TopicView.swift in Sources */,
 				B7F4A8782B5FEDCB00C9A1BE /* ContentView.swift in Sources */,
 				B7F4A8842B60113C00C9A1BE /* PListManager.swift in Sources */,
 				B7F4A8762B5FEDCB00C9A1BE /* UnsplashAppApp.swift in Sources */,

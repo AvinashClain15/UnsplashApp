@@ -22,8 +22,14 @@ extension Image {
 struct UnsplashPhoto: Codable, Identifiable {
     let id: String
     let slug: String
-    let author: User
-    let url: UnsplashPhotoUrls
+    let author: User?
+    let urls: UnsplashPhotoUrls
+}
+
+struct Topic: Codable, Identifiable {
+    let id: String
+    let slug: String
+    let cover_photo: UnsplashCoverPhotoUrls
 }
 
 struct User: Codable {
@@ -38,11 +44,25 @@ struct UnsplashPhotoUrls: Codable {
     let thumb: String
 }
 
+struct UnsplashCoverPhotoUrlsSize: Codable {
+    let raw: String
+    let full: String
+    let regular: String
+    let small: String
+    let thumb: String
+}
+
+struct UnsplashCoverPhotoUrls: Codable {
+    let urls: UnsplashCoverPhotoUrlsSize
+ 
+    
+}
+
 enum CodingKeys: String, CodingKey {
         case id
         case slug
-        case author
-        case imageURLs = "imageURLs"
+        case author = "user"
+        case imageURLs = "urls"
     }
 
 
@@ -84,6 +104,8 @@ struct ContentView: View {
                     GridItem(.flexible())
                     
             ]
+    
+    
 //            ScrollView{
 //                LazyVGrid(columns: columns, spacing: 8){
 //                    ForEach(imageURLs, id: \.self) { image in
@@ -104,6 +126,8 @@ struct ContentView: View {
     
     // Déclaration d'une variable d'état, une fois remplie, elle va modifier la vue
       @State var imageList: [UnsplashPhoto] = []
+    @StateObject var feedState = FeedState()
+    
       
       // Déclaration d'une fonction asynchrone
       func loadData() async {
@@ -115,7 +139,7 @@ struct ContentView: View {
               let request = URLRequest(url: url)
               
               // Faites l'appel réseau
-              let (data, response) = try await URLSession.shared.data(for: request)
+              let (data, _) = try await URLSession.shared.data(for: request)
               
               // Transformez les données en JSON
               let deserializedData = try JSONDecoder().decode([UnsplashPhoto].self, from: data)
@@ -130,33 +154,97 @@ struct ContentView: View {
 
       // Créez cette nouvelle structure visuelle
       var body: some View {
+          
           VStack {
               // le bouton va lancer l'appel réseau
               Button(action: {
                   Task {
-                      await loadData()
+                      await feedState.fetchHomeFeed()
+                      await feedState.fetchHomeFeedTopic()
                   }
               }, label: {
                   Text("Load Data")
               })
-              ScrollView {
-                  // Votre grille d'image
-                  LazyVGrid(columns: columns, spacing: 8){
-                      ForEach(imageList) { image in
-                          AsyncImage(url: URL(string:image.url.small)!){
-                                              image in image.image?.resizable()
-                                                  .centerCropped()
-                                                  .cornerRadius(12)
+              
+              NavigationView{
                   
-                                          }.frame(height: 150)
+                  
+                  
+              if let home = feedState.homeFeed{
+
+                      ScrollView {
+                          if let topic = feedState.homeFeedTopic{
+                              
+                           
+                                  HStack {
+                                      ForEach(topic) { photo in
+                                          NavigationLink(destination: TopicView(slug: photo.slug)) {
+                                              VStack() {
+                                                  AsyncImage(url: URL(string: photo.cover_photo.urls.regular)!) { image in
+                                                      image.image?.resizable()
+                                                          .centerCropped()
+                                                          .cornerRadius(12)
+                                                          .frame(width: 100, height: 100)
+                                                  }
+                                                                            
+                                                  Button(action: {
+                                                   
+                                                  }) {
+                                                      Text(photo.slug)
+                                                          .lineLimit(1)
+                                                  }
+                                              }
+                                          }
                                       }
                                   }
-                  
+                                  .padding(.leading, 16)
+                              
+                      }
+                          LazyVGrid(columns: columns, spacing: 8){
+                              ForEach(home) { photo in
+                                  AsyncImage(url: URL(string:photo.urls.regular)!){
+                                                      image in image.image?.resizable()
+                                                          .centerCropped()
+                                                          .cornerRadius(12)
+                          
+                                                  }.frame(height: 150)
+                                     
+                                              }
+                                          }
+                          
+                             }
+                      .navigationTitle("Feed")
+                  }else{
+                      NavigationView{
+                          
+                          ScrollView {
+                              // Votre grille d'image
+                      
+                              LazyVGrid(columns: columns, spacing: 8){
+                                  ForEach(0..<12) { _ in
+                                                                 RoundedRectangle(cornerRadius: 12)
+                                                                     .frame(height: 150)
+                                                                     .foregroundColor(Color.gray)
+                                                             }
+                                                         }
+                                                         .padding(.horizontal)
+                                                         .redacted(reason: .placeholder)
+                                                     }
+                                                     .navigationTitle("Feed")
+                                 
+                                              }
+                              
+                                 }
+                      
+                 
               }
+                  }
+              }
+              
           }
-      }
+      
 
-               }
+               
            
 #Preview {
     ContentView()
