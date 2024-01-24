@@ -24,4 +24,18 @@ Il contient une fonction.
 
 .clipped() : est utilisée pour rogner une vue, généralement une image, afin de la confiner à une forme ou à un cadre spécifique.
 
+## Expliquez les différences entre ces 3 méthodes.
+
+async/await est une approche native introduite dans Swift pour simplifier la programmation asynchrone.
+Avantages : Facilité d'utilisation, code plus lisible, gestion naturelle des erreurs.
+
+Combine est un framework introduit par Apple pour la programmation réactive en Swift. Il fournit un ensemble d'opérateurs pour travailler avec des flux de données asynchrones et combine des valeurs au fil du temps.
+Avantages : Programmation déclarative, manipulation puissante des flux de données, traitement des erreurs intégré.
+
+Les completionHandler et GCD sont des approches plus traditionnelles pour gérer l'asynchronicité.
+Avantages : Contrôle fin sur la concurrence, flexibilité
+
+
+
+
 
